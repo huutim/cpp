@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HỌC LẬP TRÌNH C++</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#2563EB',primaryLight:'#3B82F6',primaryDark:'#1D4ED8',secondary:'#7C3AED',success:'#10B981'},fontFamily:{sans:['Inter','system-ui','sans-serif']},boxShadow:{glow:'0 0 20px rgba(37,99,235,.15)',card:'0 4px 20px rgba(0,0,0,.08)'}}}}
+</script>
+<style>
+*{font-family:'Inter',sans-serif}
+body{background:linear-gradient(135deg,#F0F4FF 0%,#F8FAFC 50%,#ECFDF5 100%);background-attachment:fixed}
+.gradient-main{background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%)}
+.gradient-text{background:linear-gradient(135deg,#2563EB 0%,#7C3AED 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass{background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+pre{background:#1E293B;color:#E2E8F0;padding:14px 16px;border-radius:12px;overflow-x:auto;margin:8px 0;font:14px/1.6 'JetBrains Mono',ui-monospace,monospace}
+pre code,.wk code{background:none;padding:0;color:inherit;font-family:'JetBrains Mono',ui-monospace,monospace}
+.k{color:#7fb0ff}.s{color:#9be3a8}.n{color:#ffc47a}.c{color:#8b9ab8;font-style:italic}
+.out{border-left:4px solid #2563EB;background:#EFF6FF;padding:10px 14px;border-radius:0 12px 12px 0;font:14px/1.6 'JetBrains Mono',monospace;white-space:pre-wrap}
+.wk{margin:6px 0 0;padding-left:22px}
+.wk li{margin:0 0 10px}
+.wk code{display:block;background:#1E293B;color:#E2E8F0;padding:5px 12px;border-radius:8px;font-size:13px;line-height:1.6;margin-bottom:3px;overflow-x:auto;white-space:pre}
+.box{border-radius:14px;padding:14px 18px 14px 20px;margin-top:22px}
+.box b{display:block;margin-bottom:2px}
+.box ul{margin:4px 0 0;padding-left:20px;list-style:disc}
+.box-g{background:#ECFDF5;border-left:4px solid #10B981}.box-g b{color:#047857}
+.box-a{background:#FFFBEB;border-left:4px solid #F59E0B}.box-a b{color:#B45309}
+.box-q{background:#EFF6FF;border-left:4px solid #2563EB}
+.btn{cursor:pointer;padding:10px 18px;border-radius:12px;border:2px solid #E2E8F0;font-weight:600;font-size:15px;background:#fff;transition:all .2s}
+.btn:hover{background:#F8FAFC}
+.btn-p{background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;border-color:transparent}
+.btn-p:hover{box-shadow:0 8px 20px rgba(37,99,235,.25);background:linear-gradient(135deg,#2563EB,#7C3AED);transform:translateY(-1px)}
+.btn-ok{background:#10B981;color:#fff;border-color:#10B981}.btn-ok:hover{background:#059669}
+.btn[disabled]{opacity:.55;cursor:wait}
+.chip{cursor:pointer;min-width:42px;text-align:center;padding:6px 10px;border-radius:10px;border:2px solid #E2E8F0;font-weight:600;font-size:14px;background:#fff}
+.chip.dn{background:#ECFDF5;color:#047857;border-color:#10B981}
+.chip.on{background:#2563EB;color:#fff;border-color:#2563EB}
+.chip[disabled]{opacity:.4;cursor:not-allowed}
+.pbar{height:8px;background:#E2E8F0;border-radius:8px;overflow:hidden}
+.pbar i{display:block;height:100%;background:#10B981;transition:width .3s}
+details.dt{border:2px solid #E2E8F0;border-radius:14px;padding:10px 16px;margin-top:12px;background:#fff}
+details.dt summary{cursor:pointer;font-weight:600}
+textarea.ed{width:100%;min-height:240px;background:#1E293B;color:#E2E8F0;border:2px solid #1E293B;border-radius:14px;padding:14px;font:14px/1.6 'JetBrains Mono',ui-monospace,monospace;resize:vertical;tab-size:4;outline:none}
+textarea.ed:focus{border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.2)}
+button:focus-visible,summary:focus-visible{outline:3px solid #2563EB;outline-offset:2px}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+</style>
+</head>
+<body class="font-sans text-neutral-800 min-h-screen flex flex-col">
+<header class="glass sticky top-0 z-40 border-b border-white/50 shadow-sm">
+ <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+  <div class="flex items-center gap-3">
+   <div class="w-10 h-10 rounded-xl gradient-main flex items-center justify-center text-white shadow-glow"><i class="fa fa-graduation-cap text-lg"></i></div>
+   <div><h1 class="text-lg font-bold gradient-text">Học Lập Trình C++</h1><p class="text-xs text-neutral-500 hidden sm:block">Học từng chủ đề và làm bài tập</p></div>
+  </div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 py-6 max-w-6xl">
+ <div class="flex gap-2 mb-5" role="tablist">
+  <button id="t1" class="px-5 py-2.5 rounded-xl font-semibold transition-all" role="tab"><i class="fa fa-book mr-2"></i>Phần 1 – Học kiến thức</button>
+  <button id="t2" class="px-5 py-2.5 rounded-xl font-semibold transition-all" role="tab"><i class="fa fa-pencil mr-2"></i>Phần 2 – Làm bài tập</button>
+ </div>
+ <div class="grid lg:grid-cols-[250px_1fr] gap-5">
+  <nav id="nav" aria-label="Chủ đề" class="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible lg:sticky lg:top-24 self-start bg-white/70 rounded-2xl p-2 shadow-card"></nav>
+  <section id="main" tabindex="-1" class="bg-white rounded-2xl shadow-card p-5 md:p-8 min-w-0 outline-none"></section>
+ </div>
+</main>
+<footer class="text-center text-xs text-neutral-400 py-4">Giáo viên: Trần Hữu Tím • Học C++ từng bước • Code tự lưu trong trình duyệt của bạn</footer>
+
+<script>
+var T=[
+{t:"In ra màn hình (cout)",d:["Mọi chương trình C++ bắt đầu chạy từ hàm main. Dòng #include <iostream> cho phép dùng cout để in ra màn hình, và toán tử << đưa dữ liệu vào cout. endl xuống dòng.","Biên dịch bằng g++ bai1.cpp -o bai1, chạy bằng ./bai1 (Windows: bai1.exe)."],
+c:`#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Xin chao C++!" << endl;
+    cout << "2 + 3 = " << 2 + 3 << endl;
+    return 0;
+}`,o:"Xin chao C++!\n2 + 3 = 5",
+r:["Chữ trong ngoặc kép là chuỗi, in nguyên văn.","Có thể nối nhiều thứ bằng << trên cùng một lệnh.","Mỗi lệnh kết thúc bằng dấu chấm phẩy ;"],
+q:"Viết chương trình in ra hình tam giác sao gồm 3 dòng: một sao, hai sao, ba sao.",io:"*\n**\n***",h:"Dùng ba lệnh cout, mỗi lệnh in một dòng và kết thúc bằng endl.",
+s:`#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "*" << endl;
+    cout << "**" << endl;
+    cout << "***" << endl;
+    return 0;
+}`},
+{t:"Nhập dữ liệu (cin)",d:["cin đọc dữ liệu từ bàn phím bằng toán tử >>, đọc vào biến đã khai báo. Có thể đọc nhiều giá trị liên tiếp, cách nhau bằng khoảng trắng hoặc xuống dòng.","cin dừng ở dấu cách, nên muốn đọc cả họ tên có dấu cách hãy dùng getline(cin, s)."],
+c:`int a, b;
+cout << "Nhap hai so: ";
+cin >> a >> b;
+cout << "Tong = " << a + b << endl;`,o:"Nhap hai so: 3 4\nTong = 7",
+r:["Phải khai báo biến trước khi cin vào nó.","cin >> a >> b đọc hai giá trị theo thứ tự.","Kiểu biến quyết định cách đọc: int đọc số nguyên, string đọc một từ."],
+q:"Nhập tên (một từ) và tuổi. In ra câu: Xin chao <ten>, 10 nam nua ban se <tuoi+10> tuoi.",io:"Nhập: Lan 15\nIn ra: Xin chao Lan, 10 nam nua ban se 25 tuoi.",h:"Khai báo string ten và int tuoi, đọc bằng cin, rồi in tuoi + 10.",
+s:`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string ten;
+    int tuoi;
+    cin >> ten >> tuoi;
+    cout << "Xin chao " << ten << ", 10 nam nua ban se "
+         << tuoi + 10 << " tuoi." << endl;
+    return 0;
+}`},
+{t:"Biến và kiểu dữ liệu",d:["Biến là ô nhớ có tên và có kiểu. Kiểu hay dùng: int (số nguyên), long long (số nguyên lớn), double (số thực), char (một ký tự), bool (đúng/sai), string (chuỗi).","Dùng const cho giá trị không đổi. Đặt tên biến rõ nghĩa như chieuDai, diemTB."],
+c:`int tuoi = 18;
+double diem = 8.5;
+char xepLoai = 'A';
+bool dau = true;
+string ten = "Lan";
+const double PI = 3.14159;
+cout << ten << " " << tuoi << " " << diem << endl;`,o:"Lan 18 8.5",
+r:["Dùng double khi có phần thập phân, int sẽ cắt bỏ phần lẻ.","Ký tự viết trong nháy đơn 'A', chuỗi viết trong nháy kép.","Nên gán giá trị ban đầu cho biến ngay khi khai báo."],
+q:"Nhập chiều dài và chiều rộng (số thực) của hình chữ nhật. In chu vi và diện tích.",io:"Nhập: 5 3.5\nIn ra: Chu vi = 17\nDien tich = 17.5",h:"Khai báo hai biến double. Chu vi = 2 * (dai + rong), diện tích = dai * rong.",
+s:`#include <iostream>
+using namespace std;
+
+int main() {
+    double dai, rong;
+    cin >> dai >> rong;
+    cout << "Chu vi = " << 2 * (dai + rong) << endl;
+    cout << "Dien tich = " << dai * rong << endl;
+    return 0;
+}`},
+{t:"Các phép toán",d:["Các phép toán số học: + - * / và % (chia lấy dư, chỉ dùng cho số nguyên). Phép chia hai số nguyên cho kết quả nguyên, bỏ phần lẻ.","Viết tắt: a += 5 nghĩa là a = a + 5; i++ tăng i thêm 1."],
+c:`int a = 17, b = 5;
+cout << a / b << endl;   // 3
+cout << a % b << endl;   // 2
+cout << (double)a / b << endl; // 3.4`,o:"3\n2\n3.4",
+r:["17 / 5 = 3 vì cả hai đều là int; ép kiểu (double) để có 3.4.","n % 10 là chữ số cuối, n / 10 là bỏ chữ số cuối.","Phép nhân, chia, chia dư làm trước cộng, trừ; dùng ngoặc khi cần."],
+q:"Nhập một số nguyên có 3 chữ số. In ra tổng các chữ số của nó.",io:"Nhập: 472\nIn ra: 13",h:"Chữ số hàng đơn vị là n % 10, hàng chục là n / 10 % 10, hàng trăm là n / 100.",
+s:`#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int tong = n % 10 + n / 10 % 10 + n / 100;
+    cout << tong << endl;
+    return 0;
+}`},
+{t:"Câu lệnh if – else",d:["if chọn nhánh theo điều kiện. So sánh bằng ==, !=, <, >, <=, >=. Ghép điều kiện bằng && (và), || (hoặc), ! (phủ định).","Lỗi hay gặp: viết = (gán) thay vì == (so sánh)."],
+c:`int diem = 7;
+if (diem >= 8) {
+    cout << "Gioi";
+} else if (diem >= 5) {
+    cout << "Kha";
+} else {
+    cout << "Yeu";
+}`,o:"Kha",
+r:["Điều kiện đặt trong ngoặc tròn.","else if kiểm tra tiếp khi điều kiện trước sai.","Nhớ dùng {} để gom nhiều lệnh vào một nhánh."],
+q:"Nhập một năm. In YES nếu là năm nhuận, ngược lại in NO. (Năm nhuận: chia hết cho 400, hoặc chia hết cho 4 nhưng không chia hết cho 100.)",io:"Nhập: 2024 → YES\nNhập: 1900 → NO",h:"Điều kiện: (n % 400 == 0) || (n % 4 == 0 && n % 100 != 0).",
+s:`#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    if (n % 400 == 0 || (n % 4 == 0 && n % 100 != 0))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+    return 0;
+}`},
+{t:"Vòng lặp for",d:["for lặp lại một đoạn lệnh với số lần biết trước. Cú pháp: for (khởi tạo; điều kiện; bước nhảy). Vòng lặp chạy khi điều kiện còn đúng.","break thoát khỏi vòng lặp, continue bỏ qua lượt hiện tại."],
+c:`int tong = 0;
+for (int i = 1; i <= 5; i++) {
+    tong += i;
+}
+cout << tong << endl;`,o:"15",
+r:["i++ tăng i thêm 1 sau mỗi lượt.","Muốn cộng dồn: đặt biến tổng = 0 trước vòng lặp.","Kiểm tra kỹ điều kiện dừng: i <= n hay i < n."],
+q:"Nhập số nguyên dương n. Tính tổng các số chẵn từ 1 đến n.",io:"Nhập: 10\nIn ra: 30",h:"Cho i chạy từ 1 đến n, nếu i % 2 == 0 thì cộng i vào tổng.",
+s:`#include <iostream>
+using namespace std;
+
+int main() {
+    int n, tong = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        if (i % 2 == 0) tong += i;
+    }
+    cout << tong << endl;
+    return 0;
+}`},
+{t:"Mảng, xâu ký tự và hàm",d:["Mảng lưu nhiều phần tử cùng kiểu, chỉ số bắt đầu từ 0. Xâu ký tự (string) có size() để lấy độ dài và s[i] để lấy từng ký tự.","Hàm gom đoạn mã có tên để gọi lại: có kiểu trả về, tên và tham số. Truyền mảng vào hàm kèm kích thước."],
+c:`int timMax(int a[], int n) {
+    int m = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > m) m = a[i];
+    return m;
+}
+
+int main() {
+    int a[5] = {4, 9, 2, 7, 5};
+    cout << timMax(a, 5) << endl;
+    string s = "hello";
+    cout << s.size() << " " << s[0] << endl;
+}`,o:"9\n5 h",
+r:["Mảng n phần tử có chỉ số từ 0 đến n - 1; truy cập ngoài phạm vi gây lỗi.","Hàm phải khai báo trước nơi gọi nó.","return trả kết quả về và kết thúc hàm."],
+q:"Nhập n rồi n số nguyên. Viết hàm timMax để tìm số lớn nhất, in kết quả trong main.",io:"Nhập: 5\n4 9 2 7 5\nIn ra: 9",h:"Dùng mảng int a[100]. Lấy phần tử đầu làm max tạm, duyệt các phần tử còn lại để cập nhật.",
+s:`#include <iostream>
+using namespace std;
+
+int timMax(int a[], int n) {
+    int m = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > m) m = a[i];
+    return m;
+}
+
+int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    cout << timMax(a, n) << endl;
+    return 0;
+}`}];
+var E=[
+[
+["In ra dòng chữ Hello World.","Hello World","Dùng một lệnh cout với chuỗi trong ngoặc kép.",`int main() {
+    cout << "Hello World" << endl;
+}`],
+["In họ tên của bạn trên dòng đầu và tên lớp trên dòng thứ hai.","Nguyen Van An\nLop 10A1","Dùng hai lệnh cout, mỗi lệnh kết thúc bằng endl.",`int main() {
+    cout << "Nguyen Van An" << endl;
+    cout << "Lop 10A1" << endl;
+}`],
+["In hình tam giác sao gồm 4 dòng: 1, 2, 3, 4 dấu sao.","*\n**\n***\n****","Mỗi dòng là một lệnh cout riêng.",`int main() {
+    cout << "*" << endl;
+    cout << "**" << endl;
+    cout << "***" << endl;
+    cout << "****" << endl;
+}`],
+["Dùng cout để tính và in ra: 12 + 8 = 20 (phần kết quả do máy tính).","12 + 8 = 20","Trong cout, bạn có thể đặt biểu thức 12 + 8 sau toán tử <<.",`int main() {
+    cout << "12 + 8 = " << 12 + 8 << endl;
+}`],
+["In hình chữ nhật sao gồm 3 dòng, mỗi dòng 5 dấu sao.","*****\n*****\n*****","Ba lệnh cout giống nhau.",`int main() {
+    cout << "*****" << endl;
+    cout << "*****" << endl;
+    cout << "*****" << endl;
+}`],
+["In ba số 1 2 3 trên cùng một dòng, cách nhau một dấu cách, chỉ dùng một lệnh cout.","1 2 3","Nối các phần bằng << và chèn \" \" ở giữa.",`int main() {
+    cout << 1 << " " << 2 << " " << 3 << endl;
+}`],
+["In kết quả phép chia và phép chia dư của 10 cho 3.","10 / 3 = 3\n10 % 3 = 1","Dùng toán tử / và % ngay trong cout.",`int main() {
+    cout << "10 / 3 = " << 10 / 3 << endl;
+    cout << "10 % 3 = " << 10 % 3 << endl;
+}`],
+["In ra dòng Hom nay troi dep, một dòng trống, rồi dòng Het.","Hom nay troi dep\n\nHet","Dòng trống là một lệnh cout << endl.",`int main() {
+    cout << "Hom nay troi dep" << endl;
+    cout << endl;
+    cout << "Het" << endl;
+}`],
+["In bốn dòng: Mot, Hai, Ba, Bon, mỗi từ một dòng, chỉ dùng một lệnh cout.","Mot\nHai\nBa\nBon","Nối nhiều endl trong cùng một lệnh cout.",`int main() {
+    cout << "Mot" << endl << "Hai" << endl
+         << "Ba" << endl << "Bon" << endl;
+}`],
+["In tam giác cân bằng dấu sao gồm 3 dòng (có dấu cách phía trước).","  *\n ***\n*****","Dòng 1 có 2 dấu cách, dòng 2 có 1 dấu cách, dòng 3 không có.",`int main() {
+    cout << "  *" << endl;
+    cout << " ***" << endl;
+    cout << "*****" << endl;
+}`]
+],
+[
+["Nhập một số nguyên a và in ra chính số đó.","Vao: 5\nRa: 5","Khai báo int a, đọc bằng cin >> a.",`int main() {
+    int a;
+    cin >> a;
+    cout << a << endl;
+}`],
+["Nhập hai số nguyên a, b. In ra tổng của chúng.","Vao: 3 4\nRa: 7","cin >> a >> b đọc hai số liên tiếp.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+}`],
+["Nhập ba số nguyên. In ra tổng ba số.","Vao: 1 2 3\nRa: 6","Khai báo ba biến và đọc bằng một lệnh cin.",`int main() {
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << a + b + c << endl;
+}`],
+["Nhập tên (một từ). In ra Xin chao <ten>.","Vao: Lan\nRa: Xin chao Lan","Dùng kiểu string.",`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string ten;
+    cin >> ten;
+    cout << "Xin chao " << ten << endl;
+}`],
+["Nhập hai số nguyên a, b. In ra hiệu a - b ở dòng đầu và tích a * b ở dòng thứ hai.","Vao: 7 3\nRa: 4\n21","Đặt hai kết quả cách nhau bằng endl.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << a - b << endl << a * b << endl;
+}`],
+["Nhập một số nguyên. In ra bình phương của nó.","Vao: 9\nRa: 81","Bình phương là n * n.",`int main() {
+    int n;
+    cin >> n;
+    cout << n * n << endl;
+}`],
+["Nhập hai số nguyên a, b. In ra b rồi đến a (đổi thứ tự).","Vao: 3 5\nRa: 5 3","Đọc a, b trước rồi in theo thứ tự ngược.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << b << " " << a << endl;
+}`],
+["Nhập tên và tuổi. In ra tuổi của bạn sau 5 năm nữa.","Vao: Lan 15\nRa: Lan se 20 tuoi","Đọc string ten và int tuoi, in tuoi + 5.",`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string ten;
+    int tuoi;
+    cin >> ten >> tuoi;
+    cout << ten << " se " << tuoi + 5 << " tuoi" << endl;
+}`],
+["Nhập ba số thực. In ra trung bình cộng của chúng.","Vao: 5 6 8\nRa: 6.33333","Dùng kiểu double và chia cho 3.",`int main() {
+    double a, b, c;
+    cin >> a >> b >> c;
+    cout << (a + b + c) / 3 << endl;
+}`],
+["Nhập họ tên đầy đủ (có dấu cách) và in ra dòng Ho ten: <ho ten>.","Vao: Nguyen Van An\nRa: Ho ten: Nguyen Van An","cin dừng ở dấu cách, hãy dùng getline(cin, s).",`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string s;
+    getline(cin, s);
+    cout << "Ho ten: " << s << endl;
+}`]
+],
+[
+["Khai báo biến int tuoi bằng 15 và in giá trị ra màn hình.","15","Gán giá trị ngay khi khai báo: int tuoi = 15;",`int main() {
+    int tuoi = 15;
+    cout << tuoi << endl;
+}`],
+["Nhập cạnh a của hình vuông (số nguyên). In chu vi và diện tích.","Vao: 5\nRa: Chu vi = 20\nDien tich = 25","Chu vi = 4 * a, diện tích = a * a.",`int main() {
+    int a;
+    cin >> a;
+    cout << "Chu vi = " << 4 * a << endl;
+    cout << "Dien tich = " << a * a << endl;
+}`],
+["Nhập bán kính r (số thực). In chu vi và diện tích hình tròn, lấy PI = 3.14159.","Vao: 2\nRa: Chu vi = 12.5664\nDien tich = 12.5664","Khai báo const double PI = 3.14159; chu vi = 2 * PI * r.",`int main() {
+    const double PI = 3.14159;
+    double r;
+    cin >> r;
+    cout << "Chu vi = " << 2 * PI * r << endl;
+    cout << "Dien tich = " << PI * r * r << endl;
+}`],
+["Nhập một ký tự. In ra mã ASCII của ký tự đó.","Vao: A\nRa: 65","Ép kiểu sang int: (int)c.",`int main() {
+    char c;
+    cin >> c;
+    cout << (int)c << endl;
+}`],
+["Nhập một số thực. In ra số đó với đúng 2 chữ số thập phân.","Vao: 3.14159\nRa: 3.14","Dùng #include <iomanip> và cout << fixed << setprecision(2).",`#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    double x;
+    cin >> x;
+    cout << fixed << setprecision(2) << x << endl;
+}`],
+["Nhập nhiệt độ C (số thực). Đổi sang độ F theo công thức F = C * 9 / 5 + 32.","Vao: 100\nRa: 212","Dùng kiểu double để không bị mất phần lẻ.",`int main() {
+    double c;
+    cin >> c;
+    cout << c * 9 / 5 + 32 << endl;
+}`],
+["Nhập hai số nguyên a, b. Hoán đổi giá trị của hai biến rồi in ra a, b.","Vao: 3 5\nRa: 5 3","Dùng biến tạm: t = a; a = b; b = t.",`int main() {
+    int a, b, t;
+    cin >> a >> b;
+    t = a; a = b; b = t;
+    cout << a << " " << b << endl;
+}`],
+["Nhập đơn giá và số lượng (số nguyên). In ra thành tiền.","Vao: 25000 4\nRa: 100000","Dùng long long để tránh tràn số khi giá trị lớn.",`int main() {
+    long long dg, sl;
+    cin >> dg >> sl;
+    cout << dg * sl << endl;
+}`],
+["Nhập hai số nguyên a, b. In ra trung bình cộng dưới dạng số thực.","Vao: 3 4\nRa: 3.5","Chia cho 2.0 hoặc ép kiểu (double) để không bị cắt phần lẻ.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << (a + b) / 2.0 << endl;
+}`],
+["Nhập hai số nguyên lớn (đến 1 000 000 000). In ra tích của chúng.","Vao: 1000000000 1000000000\nRa: 1000000000000000000","int không đủ chứa, hãy dùng long long.",`int main() {
+    long long a, b;
+    cin >> a >> b;
+    cout << a * b << endl;
+}`]
+],
+[
+["Nhập hai số nguyên a, b. In ra a + b, a - b, a * b, mỗi kết quả một dòng.","Vao: 7 3\nRa: 10\n4\n21","Ba lệnh cout, mỗi lệnh một phép toán.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+    cout << a - b << endl;
+    cout << a * b << endl;
+}`],
+["Nhập hai số nguyên a, b (b khác 0). In thương và số dư của phép chia a cho b.","Vao: 17 5\nRa: Thuong: 3\nDu: 2","Thương là a / b, số dư là a % b.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << "Thuong: " << a / b << endl;
+    cout << "Du: " << a % b << endl;
+}`],
+["Nhập một số nguyên dương. In ra chữ số cuối cùng của nó.","Vao: 472\nRa: 2","Chữ số cuối là n % 10.",`int main() {
+    int n;
+    cin >> n;
+    cout << n % 10 << endl;
+}`],
+["Nhập một số nguyên có 2 chữ số. In ra tổng hai chữ số.","Vao: 47\nRa: 11","Chữ số hàng chục là n / 10, hàng đơn vị là n % 10.",`int main() {
+    int n;
+    cin >> n;
+    cout << n / 10 + n % 10 << endl;
+}`],
+["Nhập số giây t. Đổi ra giờ, phút, giây và in theo mẫu.","Vao: 3725\nRa: 1 gio 2 phut 5 giay","Giờ = t / 3600; phút = t % 3600 / 60; giây = t % 60.",`int main() {
+    int t;
+    cin >> t;
+    cout << t / 3600 << " gio "
+         << t % 3600 / 60 << " phut "
+         << t % 60 << " giay" << endl;
+}`],
+["Nhập số nguyên có 3 chữ số. In ra số đảo ngược của nó.","Vao: 123\nRa: 321","Tách trăm, chục, đơn vị rồi ghép lại: dv * 100 + chuc * 10 + tram.",`int main() {
+    int n;
+    cin >> n;
+    int dv = n % 10, chuc = n / 10 % 10, tram = n / 100;
+    cout << dv * 100 + chuc * 10 + tram << endl;
+}`],
+["Nhập ba số nguyên. In ra trung bình cộng (số thực).","Vao: 5 6 8\nRa: 6.33333","Chia tổng cho 3.0.",`int main() {
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << (a + b + c) / 3.0 << endl;
+}`],
+["Nhập hai số nguyên a, b. Tính và in giá trị (a + b) * (a - b).","Vao: 5 3\nRa: 16","Dùng ngoặc để phép cộng và trừ làm trước.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << (a + b) * (a - b) << endl;
+}`],
+["Nhập số tiền n. Hỏi đổi được bao nhiêu tờ 5000 đồng, và còn dư bao nhiêu tiền (mỗi giá trị một dòng).","Vao: 23000\nRa: 4\n3000","Số tờ là n / 5000, tiền dư là n % 5000.",`int main() {
+    int n;
+    cin >> n;
+    cout << n / 5000 << endl;
+    cout << n % 5000 << endl;
+}`],
+["Nhập số ngày n. In ra là bao nhiêu tuần và bao nhiêu ngày lẻ.","Vao: 17\nRa: 2 tuan 3 ngay","Số tuần là n / 7, ngày lẻ là n % 7.",`int main() {
+    int n;
+    cin >> n;
+    cout << n / 7 << " tuan " << n % 7 << " ngay" << endl;
+}`]
+],
+[
+["Nhập một số nguyên. In Duong nếu lớn hơn 0, Am nếu nhỏ hơn 0, Khong nếu bằng 0.","Vao: -4\nRa: Am","Dùng if, else if, else.",`int main() {
+    int n;
+    cin >> n;
+    if (n > 0) cout << "Duong" << endl;
+    else if (n < 0) cout << "Am" << endl;
+    else cout << "Khong" << endl;
+}`],
+["Nhập một số nguyên. In Chan nếu là số chẵn, Le nếu là số lẻ.","Vao: 7\nRa: Le","Số chẵn khi n % 2 == 0.",`int main() {
+    int n;
+    cin >> n;
+    if (n % 2 == 0) cout << "Chan" << endl;
+    else cout << "Le" << endl;
+}`],
+["Nhập hai số nguyên. In ra số lớn hơn.","Vao: 8 12\nRa: 12","So sánh a > b.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    if (a > b) cout << a << endl;
+    else cout << b << endl;
+}`],
+["Nhập ba số nguyên. In ra số lớn nhất.","Vao: 4 9 6\nRa: 9","Giữ biến max tạm, lần lượt so sánh với từng số.",`int main() {
+    int a, b, c;
+    cin >> a >> b >> c;
+    int m = a;
+    if (b > m) m = b;
+    if (c > m) m = c;
+    cout << m << endl;
+}`],
+["Nhập điểm (số thực). In xếp loại: từ 8 trở lên Gioi, từ 6.5 Kha, từ 5 Trung binh, còn lại Yeu.","Vao: 7\nRa: Kha","Xét từ điều kiện cao nhất xuống thấp bằng else if.",`int main() {
+    double d;
+    cin >> d;
+    if (d >= 8) cout << "Gioi" << endl;
+    else if (d >= 6.5) cout << "Kha" << endl;
+    else if (d >= 5) cout << "Trung binh" << endl;
+    else cout << "Yeu" << endl;
+}`],
+["Nhập một năm. In YES nếu là năm nhuận, ngược lại in NO.","Vao: 2024\nRa: YES","Nhuận khi chia hết cho 400, hoặc chia hết cho 4 nhưng không chia hết cho 100.",`int main() {
+    int n;
+    cin >> n;
+    if (n % 400 == 0 || (n % 4 == 0 && n % 100 != 0))
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}`],
+["Nhập hai số nguyên a, b (b khác 0). In YES nếu a chia hết cho b, ngược lại in NO.","Vao: 12 4\nRa: YES","a chia hết cho b khi a % b == 0.",`int main() {
+    int a, b;
+    cin >> a >> b;
+    if (a % b == 0) cout << "YES" << endl;
+    else cout << "NO" << endl;
+}`],
+["Giải phương trình ax + b = 0 với a, b là số thực. In nghiệm, hoặc Vo nghiem, hoặc Vo so nghiem.","Vao: 2 -6\nRa: 3","Nếu a == 0: xét b == 0 (vô số nghiệm) hay không (vô nghiệm). Nếu a khác 0 thì x = -b / a.",`int main() {
+    double a, b;
+    cin >> a >> b;
+    if (a == 0) {
+        if (b == 0) cout << "Vo so nghiem" << endl;
+        else cout << "Vo nghiem" << endl;
+    } else {
+        cout << -b / a << endl;
+    }
+}`],
+["Nhập ba số a, b, c. In YES nếu chúng là độ dài ba cạnh của một tam giác, ngược lại in NO.","Vao: 3 4 5\nRa: YES","Tổng hai cạnh bất kỳ phải lớn hơn cạnh còn lại.",`int main() {
+    double a, b, c;
+    cin >> a >> b >> c;
+    if (a + b > c && a + c > b && b + c > a)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}`],
+["Nhập tháng t (từ 1 đến 12). In số ngày của tháng đó (tháng 2 tính 28 ngày).","Vao: 4\nRa: 30","Tháng 4, 6, 9, 11 có 30 ngày; tháng 2 có 28; còn lại 31.",`int main() {
+    int t;
+    cin >> t;
+    if (t == 2) cout << 28 << endl;
+    else if (t == 4 || t == 6 || t == 9 || t == 11)
+        cout << 30 << endl;
+    else cout << 31 << endl;
+}`]
+],
+[
+["Dùng vòng lặp for in các số từ 1 đến 10 trên một dòng, cách nhau dấu cách.","1 2 3 4 5 6 7 8 9 10","for (int i = 1; i <= 10; i++)",`int main() {
+    for (int i = 1; i <= 10; i++)
+        cout << i << " ";
+    cout << endl;
+}`],
+["Nhập n. In các số từ 1 đến n trên một dòng.","Vao: 5\nRa: 1 2 3 4 5","Điều kiện lặp là i <= n.",`int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cout << i << " ";
+    cout << endl;
+}`],
+["Nhập n. Tính và in tổng các số từ 1 đến n.","Vao: 100\nRa: 5050","Đặt tong = 0 trước vòng lặp, mỗi lượt cộng thêm i.",`int main() {
+    int n, tong = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        tong += i;
+    cout << tong << endl;
+}`],
+["Nhập n. Tính tổng các số chẵn từ 1 đến n.","Vao: 10\nRa: 30","Chỉ cộng i khi i % 2 == 0.",`int main() {
+    int n, tong = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        if (i % 2 == 0) tong += i;
+    cout << tong << endl;
+}`],
+["Nhập n. In bảng cửu chương của n, từ n x 1 đến n x 10, mỗi phép tính một dòng.","Vao: 5\nRa: 5 x 1 = 5\n5 x 2 = 10\n...\n5 x 10 = 50","In n, \" x \", i, \" = \", n * i trong mỗi lượt.",`int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= 10; i++)
+        cout << n << " x " << i << " = " << n * i << endl;
+}`],
+["Nhập n (n từ 1 đến 20). Tính và in n giai thừa (n! = 1 * 2 * ... * n).","Vao: 5\nRa: 120","Đặt gt = 1 và nhân dần; dùng long long.",`int main() {
+    int n;
+    long long gt = 1;
+    cin >> n;
+    for (int i = 2; i <= n; i++)
+        gt *= i;
+    cout << gt << endl;
+}`],
+["Nhập n. Đếm và in số lượng ước dương của n.","Vao: 12\nRa: 6","Duyệt i từ 1 đến n, nếu n % i == 0 thì tăng biến đếm.",`int main() {
+    int n, dem = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        if (n % i == 0) dem++;
+    cout << dem << endl;
+}`],
+["Nhập n. In YES nếu n là số nguyên tố, ngược lại in NO.","Vao: 17\nRa: YES","Số nguyên tố lớn hơn 1 và chỉ có đúng 2 ước. Có thể dừng kiểm tra khi i * i > n.",`int main() {
+    int n;
+    cin >> n;
+    bool nt = n >= 2;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0) nt = false;
+    cout << (nt ? "YES" : "NO") << endl;
+}`],
+["Nhập n. In các số từ 1 đến n chia hết cho 3 hoặc cho 5, cách nhau dấu cách.","Vao: 10\nRa: 3 5 6 9 10","Điều kiện: i % 3 == 0 || i % 5 == 0.",`int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        if (i % 3 == 0 || i % 5 == 0)
+            cout << i << " ";
+    cout << endl;
+}`],
+["Nhập n. In tam giác sao gồm n dòng (dòng i có i dấu sao).","Vao: 4\nRa: *\n**\n***\n****","Dùng hai vòng for lồng nhau: vòng ngoài chạy dòng, vòng trong in sao.",`int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++)
+            cout << "*";
+        cout << endl;
+    }
+}`]
+],
+[
+["Nhập n rồi n số nguyên vào mảng. In lại các phần tử trên một dòng.","Vao: 5\n1 2 3 4 5\nRa: 1 2 3 4 5","Khai báo int a[100]; dùng for để đọc và for để in.",`int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < n; i++) cout << a[i] << " ";
+    cout << endl;
+}`],
+["Nhập mảng n số nguyên. In ra tổng các phần tử.","Vao: 4\n1 2 3 4\nRa: 10","Dùng biến tong = 0 và cộng dồn a[i].",`int main() {
+    int n, a[100], tong = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        tong += a[i];
+    }
+    cout << tong << endl;
+}`],
+["Nhập mảng n số nguyên. In ra giá trị lớn nhất.","Vao: 5\n4 9 2 7 5\nRa: 9","Lấy a[0] làm max tạm, duyệt các phần tử còn lại.",`int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    int m = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] > m) m = a[i];
+    cout << m << endl;
+}`],
+["Nhập mảng n số nguyên. Đếm và in số lượng số chẵn.","Vao: 5\n1 2 3 4 6\nRa: 3","Đếm khi a[i] % 2 == 0.",`int main() {
+    int n, a[100], dem = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        if (a[i] % 2 == 0) dem++;
+    }
+    cout << dem << endl;
+}`],
+["Nhập mảng n số nguyên. In các phần tử theo thứ tự ngược lại.","Vao: 4\n1 2 3 4\nRa: 4 3 2 1","Cho i chạy từ n - 1 giảm về 0.",`int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    for (int i = n - 1; i >= 0; i--)
+        cout << a[i] << " ";
+    cout << endl;
+}`],
+["Viết hàm binhPhuong(x) trả về x * x. Nhập một số nguyên, in bình phương của nó bằng cách gọi hàm.","Vao: 9\nRa: 81","Khai báo hàm trước main: int binhPhuong(int x) { return x * x; }",`int binhPhuong(int x) {
+    return x * x;
+}
+
+int main() {
+    int x;
+    cin >> x;
+    cout << binhPhuong(x) << endl;
+}`],
+["Viết hàm max2(a, b) trả về số lớn hơn. Nhập hai số, in kết quả bằng hàm đó.","Vao: 8 12\nRa: 12","Trong hàm dùng if (a > b) return a; return b;",`int max2(int a, int b) {
+    if (a > b) return a;
+    return b;
+}
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << max2(a, b) << endl;
+}`],
+["Nhập một xâu ký tự (có dấu cách). In ra độ dài xâu và ký tự đầu tiên.","Vao: hello world\nRa: 11 h","Dùng getline, s.size() và s[0].",`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string s;
+    getline(cin, s);
+    cout << s.size() << " " << s[0] << endl;
+}`],
+["Nhập một xâu ký tự (không có dấu cách). Đếm và in số lần xuất hiện của ký tự a.","Vao: banana\nRa: 3","Duyệt i từ 0 đến s.size() - 1 và kiểm tra s[i] == 'a'.",`#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+    int dem = 0;
+    for (int i = 0; i < s.size(); i++)
+        if (s[i] == 'a') dem++;
+    cout << dem << endl;
+}`],
+["Viết hàm laNT(n) kiểm tra số nguyên tố. Nhập n, in tất cả số nguyên tố từ 1 đến n.","Vao: 20\nRa: 2 3 5 7 11 13 17 19","Hàm trả về bool; trong main gọi laNT(i) với mỗi i.",`bool laNT(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++)
+        if (n % i == 0) return false;
+    return true;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        if (laNT(i)) cout << i << " ";
+    cout << endl;
+}`]
+]
+];
+var W=[
+[["#include <iostream>","Mượn thư viện iostream để dùng được cout (in ra) và cin (nhập vào)."],["using namespace std;","Cho phép viết cout thay vì std::cout."],["int main() {","Điểm bắt đầu: máy chạy các lệnh trong cặp ngoặc { } từ trên xuống dưới."],["cout << \"Xin chao C++!\" << endl;","Đưa chuỗi chữ ra màn hình, rồi endl xuống dòng."],["cout << \"2 + 3 = \" << 2 + 3 << endl;","Chữ trong ngoặc kép in nguyên văn; 2 + 3 không có ngoặc kép nên máy tính ra 5 rồi mới in."],["return 0;","Báo chương trình kết thúc bình thường."]],
+[["int a, b;","Khai báo hai ô nhớ kiểu số nguyên tên a và b."],["cout << \"Nhap hai so: \";","In lời nhắc để người dùng biết cần nhập gì."],["cin >> a >> b;","Chờ người dùng gõ hai số (cách nhau bằng dấu cách hoặc xuống dòng) rồi lưu vào a và b."],["cout << \"Tong = \" << a + b << endl;","Tính a + b rồi in kết quả."]],
+[["int tuoi = 18;","Tạo ô nhớ số nguyên tên tuoi và cất số 18 vào."],["double diem = 8.5;","Ô nhớ số thực, chứa được số có phần thập phân."],["char xepLoai = 'A';","Một ký tự duy nhất, viết trong nháy đơn."],["bool dau = true;","Chỉ nhận true (đúng) hoặc false (sai)."],["string ten = \"Lan\";","Chuỗi ký tự, viết trong nháy kép."],["const double PI = 3.14159;","Hằng số: gán một lần, không được sửa sau đó."],["cout << ten << \" \" << tuoi ...","In nhiều biến liên tiếp, chèn \" \" để chúng cách nhau."]],
+[["int a = 17, b = 5;","Hai số nguyên để thử."],["a / b","Chia hai số nguyên: 17 chia 5 được 3 (bỏ phần lẻ)."],["a % b","Số dư của phép chia: 17 = 3 × 5 + 2, nên dư 2."],["(double)a / b","Ép a thành số thực trước khi chia, nên ra 3.4."]],
+[["int diem = 7;","Điểm cần xét."],["if (diem >= 8) {","Nếu điểm từ 8 trở lên thì chạy khối lệnh trong { }."],["} else if (diem >= 5) {","Nếu điều kiện trên sai thì thử điều kiện này. 7 >= 5 đúng nên in Kha."],["} else {","Nếu mọi điều kiện phía trên đều sai thì chạy khối này."]],
+[["int tong = 0;","Ô nhớ chứa tổng, bắt đầu từ 0."],["for (int i = 1; i <= 5; i++) {","i bắt đầu bằng 1; còn i <= 5 thì còn lặp; sau mỗi lượt i tăng thêm 1."],["tong += i;","Cộng i vào tổng (giống tong = tong + i). Lần lượt cộng 1, 2, 3, 4, 5."],["cout << tong << endl;","Vòng lặp kết thúc, in tổng là 15."]],
+[["int timMax(int a[], int n) {","Hàm nhận mảng a và số phần tử n, trả về một số nguyên."],["int m = a[0];","Giả sử phần tử đầu tiên là lớn nhất."],["for (int i = 1; i < n; i++)","Xét các phần tử còn lại (chỉ số 1 đến n - 1)."],["if (a[i] > m) m = a[i];","Gặp số lớn hơn thì cập nhật m."],["return m;","Trả m về nơi gọi hàm."],["int a[5] = {4, 9, 2, 7, 5};","Mảng 5 phần tử, chỉ số từ 0 đến 4."],["s.size() và s[0]","Độ dài của xâu và ký tự đầu tiên của xâu."]]
+];
+var M=[
+["Quên dấu chấm phẩy ở cuối lệnh: trình biên dịch báo expected ';'. Hãy kiểm tra dòng ngay phía trên chỗ báo lỗi.","Viết Cout hoặc COUT: C++ phân biệt chữ hoa và chữ thường, phải viết cout.","Quên ngoặc kép đóng chuỗi, hoặc viết < thay vì <<."],
+["Viết cin << a (sai chiều). Nhớ: cin dùng >>, cout dùng <<.","Dùng cin vào biến trước khi khai báo biến đó.","Đọc họ tên có dấu cách bằng cin >> chỉ lấy được từ đầu tiên; hãy dùng getline(cin, s)."],
+["Dùng int cho số có phần lẻ: int x = 8.5; chỉ giữ lại 8. Hãy dùng double.","Viết 'Lan' (nháy đơn) cho chuỗi; nháy đơn chỉ dành cho một ký tự.","Dùng biến chưa gán giá trị: lúc đó giá trị là số ngẫu nhiên."],
+["Mong 17 / 5 ra 3.4 nhưng ra 3 vì cả hai đều là int. Hãy dùng 17.0 / 5 hoặc ép kiểu (double).","Dùng % với số thực là không hợp lệ.","Chia cho 0 làm chương trình lỗi; hãy kiểm tra mẫu số trước khi chia."],
+["Viết if (a = 5) là phép gán chứ không phải so sánh; phải viết a == 5.","Viết 5 <= x <= 10 không đúng ý; phải viết x >= 5 && x <= 10.","Đặt dấu ; ngay sau if (...) khiến lệnh phía sau luôn chạy."],
+["Quên gán tong = 0 trước vòng lặp: tổng bắt đầu từ một số ngẫu nhiên.","Nhầm i < n với i <= n: bỏ sót hoặc thừa một lượt.","Đặt dấu ; ngay sau for (...): vòng lặp chạy mà không làm gì."],
+["Truy cập a[n] hoặc a[-1] là ngoài phạm vi: kết quả sai hoặc chương trình lỗi.","Khai báo mảng nhỏ hơn số phần tử n nhập vào.","Gọi hàm trước khi khai báo hàm đó."]
+];
+var X=[
+["Mỗi lệnh cout in chuỗi trong ngoặc kép ra màn hình; endl xuống dòng.","Hai lệnh cout, mỗi lệnh một dòng; endl ngăn cách hai dòng.","Tam giác có 4 dòng, dòng sau dài hơn dòng trước một dấu sao; mỗi dòng một lệnh.","Chuỗi trong ngoặc kép in nguyên văn, còn 12 + 8 nằm ngoài ngoặc kép nên được tính thành 20.","Lặp lại ba lần cùng một dòng gồm 5 dấu sao.","Giữa ba số chèn chuỗi \" \" để tạo khoảng cách.","10 / 3 là phép chia nguyên (3), 10 % 3 là phần dư (1); cả hai đặt ngay trong cout.","Lệnh cout << endl; chỉ xuống dòng, nên tạo ra dòng trống.","Một lệnh cout có thể nối nhiều endl, mỗi endl kết thúc một dòng.","Cần thêm dấu cách phía trước để căn giữa: dòng 1 có 2 dấu cách, dòng 2 có 1, dòng 3 không có."],
+["Khai báo a, đọc bằng cin >> a rồi in lại.","Đọc a và b bằng một lệnh cin, tính a + b rồi in.","Giống bài trước nhưng có ba biến; cộng cả ba.","Tên là chữ nên dùng kiểu string. cin >> ten chỉ đọc đến dấu cách đầu tiên.","Tính a - b và a * b, mỗi giá trị in trên một dòng.","Bình phương của n là n nhân n.","Chỉ cần in b trước, a sau; giá trị của a và b không bị thay đổi.","Tuổi là số nguyên nên đọc vào int; tuổi sau 5 năm là tuoi + 5.","Dùng double để giữ phần lẻ; cộng ba số rồi chia cho 3.","getline đọc cả dòng kể cả dấu cách, khác với cin >> chỉ đọc một từ."],
+["Khai báo kèm giá trị ban đầu rồi in ra.","Chu vi hình vuông là 4 * a, diện tích là a * a.","Đặt PI là hằng số kiểu double. Chu vi = 2 * PI * r, diện tích = PI * r * r.","Ép kiểu (int)c đổi ký tự thành mã số ASCII của nó (A là 65).","fixed cùng setprecision(2) ép cout in đúng 2 chữ số sau dấu phẩy; cần #include <iomanip>.","Công thức F = C * 9 / 5 + 32; dùng double để phép chia cho 5 không làm mất phần lẻ.","Cần biến tạm t giữ giá trị của a, để khi gán a = b không làm mất giá trị cũ của a.","Giá và số lượng có thể lớn nên dùng long long; thành tiền là dg * sl.","Chia cho 2.0 (số thực) để kết quả giữ phần lẻ; chia cho 2 sẽ bị cắt.","Tích có thể lên đến 10^18, vượt giới hạn của int, nên dùng long long."],
+["Ba phép toán cơ bản, mỗi phép một lệnh cout.","a / b là thương nguyên, a % b là số dư (17 = 3 × 5 + 2).","n % 10 là phần dư khi chia cho 10, chính là chữ số cuối.","n / 10 bỏ chữ số cuối (47 thành 4) nên là chữ số hàng chục; n % 10 là hàng đơn vị.","Một giờ có 3600 giây: t / 3600 là số giờ; t % 3600 là số giây còn lại, chia 60 được số phút; t % 60 là số giây dư.","Tách ba chữ số bằng / và %, rồi ghép lại theo thứ tự ngược.","Chia tổng cho 3.0 để ra số thực.","Dấu ngoặc làm phép cộng và phép trừ chạy trước phép nhân.","n / 5000 là số tờ nguyên; n % 5000 là số tiền lẻ còn dư.","Một tuần có 7 ngày: n / 7 là số tuần đầy đủ, n % 7 là số ngày lẻ."],
+["Xét lần lượt: lớn hơn 0, nhỏ hơn 0, còn lại là bằng 0.","n % 2 == 0 nghĩa là chia hết cho 2, tức là số chẵn.","So sánh a > b rồi in số lớn hơn.","Giả sử a lớn nhất, rồi so với b và c; nếu có số lớn hơn thì thay vào m.","Xét từ mức cao nhất xuống thấp; else if chỉ chạy khi điều kiện trước sai.","Năm nhuận: chia hết cho 400, hoặc chia hết cho 4 mà không chia hết cho 100.","a chia hết cho b khi số dư a % b bằng 0.","Nếu a = 0 thì không còn x: b = 0 thì vô số nghiệm, ngược lại vô nghiệm. Nếu a khác 0 thì x = -b / a.","Tổng hai cạnh bất kỳ phải lớn hơn cạnh còn lại; cả ba điều kiện đều đúng (&&) thì là tam giác.","Tháng 2 có 28 ngày; tháng 4, 6, 9, 11 có 30 ngày; các tháng còn lại có 31 ngày."],
+["Vòng for cho i chạy từ 1 đến 10, mỗi lượt in i kèm một dấu cách.","Giống bài 1 nhưng điểm dừng là n do người dùng nhập.","Đặt tong = 0 rồi mỗi lượt cộng thêm i; kết thúc vòng lặp thì in tong.","Chỉ cộng i vào tổng khi i chia hết cho 2.","Mỗi lượt in một dòng gồm n, i và tích n * i.","Đặt gt = 1 rồi nhân dần với 2, 3, ..., n; dùng long long vì giai thừa tăng rất nhanh.","Mỗi i từ 1 đến n mà n % i == 0 thì i là ước, tăng biến đếm.","Giả sử n là số nguyên tố; nếu tìm được ước nào thì đổi thành không phải. Chỉ cần kiểm tra đến khi i * i > n.","Duyệt từ 1 đến n, chỉ in số chia hết cho 3 hoặc cho 5.","Vòng ngoài chạy theo từng dòng i; vòng trong in i dấu sao, rồi xuống dòng."],
+["Đọc n, dùng vòng for đọc từng phần tử a[0] đến a[n - 1]; dùng vòng for khác để in.","Vừa đọc vừa cộng dồn vào tong.","Lấy phần tử đầu làm max tạm, duyệt các phần tử sau, gặp số lớn hơn thì cập nhật.","Mỗi phần tử đọc vào, nếu chia hết cho 2 thì tăng biến đếm.","Cho i chạy từ n - 1 giảm dần về 0 để in ngược.","Hàm nhận x, trả về x * x. Trong main gọi binhPhuong(x) rồi in kết quả.","Hàm so sánh hai số và trả về số lớn hơn bằng return.","getline đọc cả dòng; size() cho độ dài (tính cả dấu cách); s[0] là ký tự đầu tiên.","Duyệt từng ký tự s[i], gặp 'a' thì tăng biến đếm.","Hàm laNT trả về true hoặc false; main duyệt từ 1 đến n và in những số thỏa."]
+];
+
+var G=[
+[["Lệnh cout làm gì?","cout đưa dữ liệu ra màn hình. Toán tử << giống một mũi tên chỉ hướng dữ liệu đi vào cout. endl kết thúc dòng hiện tại và xuống dòng mới."],["Chữ và số khác nhau thế nào?","Chữ nằm trong ngoặc kép (\"Xin chao\") được in nguyên văn. Số hoặc phép tính không có ngoặc kép (2 + 3) sẽ được máy tính ra kết quả trước rồi mới in."],["Chương trình bắt đầu từ đâu?","Máy luôn chạy các lệnh trong hàm main, từ trên xuống dưới. Dòng #include <iostream> mượn thư viện để dùng được cout. Mỗi lệnh kết thúc bằng dấu chấm phẩy ;"]],
+[["cin làm gì?","Chương trình dừng lại, chờ bạn gõ dữ liệu rồi nhấn Enter. Toán tử >> đưa giá trị bạn gõ vào biến đứng phía sau."],["Phải khai báo biến trước","Biến là ô nhớ có kiểu. Muốn viết cin >> a thì phải có sẵn int a;. Kiểu của biến quyết định cách đọc: int đọc số nguyên, double đọc số thực, string đọc một từ."],["Đọc nhiều giá trị","cin >> a >> b đọc lần lượt hai giá trị, cách nhau bằng dấu cách hoặc xuống dòng. Muốn đọc cả dòng có dấu cách, dùng getline(cin, s)."]],
+[["Biến là gì?","Hãy hình dung biến như một chiếc hộp có dán nhãn. Tên biến là nhãn, giá trị là thứ nằm trong hộp. Câu lệnh int tuoi = 18; tạo hộp kiểu số nguyên tên tuoi và bỏ số 18 vào."],["Vì sao phải có kiểu?","C++ cần biết hộp chứa loại gì để cấp đủ chỗ: int cho số nguyên, double cho số thực, char cho một ký tự, bool cho đúng/sai, string cho chuỗi. Kiểu quyết định phép toán nào dùng được."],["Dấu = trong C++","Dấu = là phép gán: lấy giá trị bên phải bỏ vào biến bên trái. Vì vậy tuoi = tuoi + 1; hợp lệ. Muốn so sánh bằng nhau thì dùng ==."],["Hằng số","Từ khóa const tạo ra giá trị cố định, không được sửa sau khi gán, ví dụ const double PI = 3.14159;"]],
+[["Bốn phép tính quen thuộc","+, - và * hoạt động như trong toán học. Phép / phụ thuộc vào kiểu: chia hai số nguyên cho kết quả nguyên (17 / 5 = 3), chia số thực cho kết quả thực."],["Chia lấy dư","Khi chia 17 cho 5: chia được 3 lần và còn dư 2. Phép / cho số lần chia được (3), phép % cho phần dư (2). % chỉ dùng cho số nguyên và rất hay dùng để kiểm tra chẵn lẻ, tách chữ số."],["Muốn kết quả có phần lẻ","Ép một số thành số thực trước khi chia: (double)a / b cho 3.4. Hoặc viết 17.0 / 5."],["Thứ tự thực hiện","Nhân, chia, chia dư làm trước; cộng, trừ làm sau. Muốn đổi thứ tự thì dùng ngoặc tròn: (2 + 3) * 4 = 20."]],
+[["Điều kiện là gì?","Điều kiện là một câu hỏi chỉ có hai câu trả lời: Đúng hoặc Sai, ví dụ diem >= 8. Máy so sánh rồi cho ra đúng hoặc sai."],["Nếu điều kiện đúng thì làm gì?","Nếu điều kiện trong ngoặc sau if đúng, máy thực hiện các lệnh nằm trong cặp ngoặc nhọn { } của if, rồi bỏ qua tất cả các nhánh còn lại (else if, else)."],["Nếu điều kiện sai thì sao?","Nếu điều kiện sai, máy bỏ qua khối { } của if và chuyển xuống kiểm tra else if tiếp theo. Nếu mọi điều kiện đều sai, máy thực hiện khối else (else không có điều kiện)."],["Máy xét từ trên xuống","Các nhánh được xét lần lượt từ trên xuống. Nhánh đầu tiên có điều kiện đúng sẽ chạy, những nhánh bên dưới không được xét nữa. Vì vậy phải xét mức cao nhất trước (>= 8 rồi mới đến >= 5)."],["Ghép điều kiện","&& nghĩa là và (cả hai cùng đúng), || nghĩa là hoặc (một trong hai đúng), ! là phủ định. Ví dụ x >= 5 && x <= 10 kiểm tra x nằm trong đoạn từ 5 đến 10."]],
+[["Vòng lặp để làm gì?","Khi một việc phải làm nhiều lần, thay vì viết lệnh lặp đi lặp lại, ta dùng for để máy tự lặp."],["Ba phần trong ngoặc của for","for (int i = 1; i <= 5; i++) gồm: khởi tạo (i bắt đầu bằng 1), điều kiện (còn i <= 5 thì còn lặp), bước nhảy (sau mỗi lượt i tăng thêm 1)."],["Cách cộng dồn","Đặt tong = 0 trước vòng lặp. Mỗi lượt cộng thêm i vào tong. Khi điều kiện sai, vòng lặp dừng và máy chạy tiếp lệnh nằm sau vòng lặp."]],
+[["placeholder","placeholder"]]
+];
+var TR=[
+["Máy bắt đầu chạy từ hàm main.","Lệnh 1: in Xin chao C++! rồi xuống dòng.","Lệnh 2: tính 2 + 3 = 5, in 2 + 3 = 5 rồi xuống dòng.","return 0; báo chương trình kết thúc bình thường."],
+["Khai báo hai ô nhớ a và b kiểu số nguyên.","Máy in Nhap hai so: rồi chờ.","Bạn gõ 3 4: a nhận 3, b nhận 4.","Máy tính a + b = 7 và in Tong = 7."],
+["Tạo các biến: tuoi = 18, diem = 8.5, xepLoai = 'A', dau = true, ten = Lan.","PI là hằng số 3.14159, không sửa được nữa.","cout in ten, tuoi, diem cách nhau bằng dấu cách: Lan 18 8.5."],
+["a = 17, b = 5.","17 / 5 = 3 (hai số nguyên nên bỏ phần lẻ).","17 % 5 = 2 (còn dư 2).","(double)a / b: ép a thành số thực nên 17 / 5 = 3.4."],
+["diem = 7.","Xét if (diem >= 8): 7 >= 8 là SAI, bỏ qua khối in Gioi.","Xét else if (diem >= 5): 7 >= 5 là ĐÚNG, chạy lệnh in Kha.","Đã có nhánh đúng nên bỏ qua else. Kết quả: Kha."],
+["tong = 0.","Lượt 1: i = 1, tong = 0 + 1 = 1.","Lượt 2: i = 2, tong = 1 + 2 = 3.","Lượt 3: i = 3, tong = 3 + 3 = 6.","Lượt 4: i = 4, tong = 6 + 4 = 10.","Lượt 5: i = 5, tong = 10 + 5 = 15.","i tăng lên 6, điều kiện i <= 5 sai nên vòng lặp dừng; in 15."],
+["placeholder"]
+];
+(function(){
+var oe=E[6],ox=X[6];
+var tm={t:"Mảng (array)",d:["Mảng lưu nhiều phần tử cùng kiểu, khai báo ví dụ int a[100]. Chỉ số bắt đầu từ 0, nên mảng n phần tử có chỉ số từ 0 đến n - 1. Truy cập ngoài phạm vi gây lỗi khó đoán.","Muốn nhập hoặc in cả mảng, dùng vòng for cho i chạy từ 0 đến n - 1. Trong C++ hiện đại, vector là mảng tự co giãn kích thước (vector<int> v; v.push_back(x); v.size()), bạn sẽ gặp sau."],
+c:`int a[5] = {4, 9, 2, 7, 5};
+cout << a[0] << " " << a[4] << endl;
+a[1] = 0;
+int tong = 0;
+for (int i = 0; i < 5; i++) {
+    tong += a[i];
+}
+cout << tong << endl;
+int m = a[0];
+for (int i = 1; i < 5; i++)
+    if (a[i] > m) m = a[i];
+cout << m << endl;`,o:"4 5\n18\n7",
+r:["Mảng n phần tử có chỉ số từ 0 đến n - 1; a[n] là ngoài phạm vi.","Khai báo mảng cần kích thước tối đa: int a[100]; rồi chỉ dùng n phần tử đầu.","Nhập và in mảng bằng vòng for chạy i từ 0 đến n - 1."]};
+var tx={t:"Xâu ký tự (string)",d:["Xâu ký tự dùng kiểu string (cần #include <string>). Mỗi ký tự có chỉ số bắt đầu từ 0: s[0] là ký tự đầu, s[s.size() - 1] là ký tự cuối. s.size() cho độ dài xâu, tính cả dấu cách.","cin >> s chỉ đọc đến dấu cách; muốn đọc cả dòng dùng getline(cin, s). Nối xâu bằng dấu +, s.substr(vị_trí, độ_dài) để cắt xâu, s.find(x) để tìm vị trí của x."],
+c:`string s = "Hello World";
+cout << s.size() << " " << s[0] << " " << s[s.size() - 1] << endl;
+cout << s.substr(0, 5) << endl;
+cout << s + "!" << endl;
+cout << s.find("World") << endl;
+for (int i = 0; i < 3; i++)
+    cout << s[i] << " ";
+cout << endl;`,o:"11 H d\nHello\nHello World!\n6\nH e l",
+r:["Cần #include <string> để dùng kiểu string.","cin >> s đọc một từ; getline(cin, s) đọc cả dòng có dấu cách.","Vị trí ký tự bắt đầu từ 0; s.size() - 1 là vị trí ký tự cuối. Ký tự viết trong nháy đơn 'a', xâu trong nháy kép \"abc\"."]};
+var th={t:"Hàm (function)",d:["Hàm là một nhóm lệnh được đặt tên để dùng lại nhiều lần. Khai báo hàm gồm: kiểu trả về, tên hàm, danh sách tham số trong ngoặc và thân hàm trong { }. Hàm được gọi bằng cách viết tên hàm kèm đối số.","Từ khóa return gửi kết quả về nơi gọi hàm. Hàm không trả về giá trị thì dùng kiểu void. Hàm phải được khai báo trước chỗ gọi nó (thường đặt phía trên hàm main)."],
+c:`void chao(string ten) {
+    cout << "Xin chao " << ten << endl;
+}
+
+int binhPhuong(int x) {
+    return x * x;
+}
+
+int max2(int a, int b) {
+    if (a > b) return a;
+    return b;
+}
+
+int main() {
+    chao("Lan");
+    cout << binhPhuong(5) << endl;
+    cout << max2(8, 12) << endl;
+}`,o:"Xin chao Lan\n25\n12",
+r:["Hàm có kiểu trả về (int, double, bool...) hoặc void nếu không trả về gì.","return trả kết quả về và kết thúc hàm ngay lập tức.","Hàm phải được viết (hoặc khai báo) trước hàm main thì main mới gọi được."]};
+T.splice(6,1,tm,tx,th);
+
+var HD="#include <iostream>\n#include <string>\nusing namespace std;\n\n";
+var em=[oe[0],oe[1],oe[2],
+["Nhập n rồi dãy n số nguyên. In ra giá trị nhỏ nhất.","Vao: 5\n4 9 2 7 5\nRa: 2","Lấy a[0] làm min tạm, duyệt các phần tử còn lại, gặp số nhỏ hơn thì cập nhật.",`int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    int m = a[0];
+    for (int i = 1; i < n; i++)
+        if (a[i] < m) m = a[i];
+    cout << m << endl;
+}`],
+["Nhập n rồi dãy n số nguyên. In ra phần tử đầu tiên và phần tử cuối cùng trên một dòng.","Vao: 4\n1 2 3 4\nRa: 1 4","Phần tử đầu là a[0], phần tử cuối là a[n - 1].",`int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    cout << a[0] << " " << a[n - 1] << endl;
+}`],
+oe[3],
+["Nhập n rồi dãy n số nguyên. In ra trung bình cộng của các phần tử.","Vao: 4\n1 2 3 4\nRa: 2.5","Dùng biến double để cộng dồn, rồi chia cho n.",`int main() {
+    int n, a[100];
+    double tong = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        tong += a[i];
+    }
+    cout << tong / n << endl;
+}`],
+oe[4],
+["Nhập n, rồi dãy n số nguyên, rồi một số x ở dòng thứ ba. Đếm và in số phần tử lớn hơn x.","Vao: 5\n1 5 8 3 9\n4\nRa: 3","Đọc x sau khi đọc xong mảng, rồi duyệt và đếm những phần tử lớn hơn x.",`int main() {
+    int n, a[100], x, dem = 0;
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    cin >> x;
+    for (int i = 0; i < n; i++)
+        if (a[i] > x) dem++;
+    cout << dem << endl;
+}`],
+["Nhập n rồi dãy n số nguyên. Sắp xếp tăng dần và in ra trên một dòng.","Vao: 5\n4 9 2 7 5\nRa: 2 4 5 7 9","Dùng #include <algorithm> và sort(a, a + n).",`#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, a[100];
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i];
+    sort(a, a + n);
+    for (int i = 0; i < n; i++) cout << a[i] << " ";
+    cout << endl;
+}`]];
+var xm=[ox[0],ox[1],ox[2],
+"Lấy a[0] làm min tạm; gặp phần tử nhỏ hơn thì cập nhật m.",
+"a[0] là phần tử đầu, a[n - 1] là phần tử cuối; in hai giá trị cách nhau bằng dấu cách.",
+ox[3],
+"Cộng dồn vào biến double rồi chia cho n để giữ phần lẻ.",
+ox[4],
+"Đọc thêm số x, duyệt từng phần tử, phần tử nào lớn hơn x thì tăng biến đếm.",
+"sort(a, a + n) sắp xếp n phần tử đầu của mảng theo thứ tự tăng dần, sau đó duyệt và in."];
+var es=[
+["Nhập một xâu ký tự (một từ). In ra xâu đó viết hoa toàn bộ.","Vao: hello\nRa: HELLO","Duyệt từng ký tự và dùng toupper (cần #include <cctype>).",`#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string s;
+    cin >> s;
+    for (int i = 0; i < s.size(); i++)
+        s[i] = toupper(s[i]);
+    cout << s << endl;
+}`],
+oe[7],
+["Nhập một xâu ký tự (một từ). In ra ký tự cuối cùng của xâu.","Vao: python\nRa: n","Ký tự cuối là s[s.size() - 1].",HD+`int main() {
+    string s;
+    cin >> s;
+    cout << s[s.size() - 1] << endl;
+}`],
+["Nhập một xâu ký tự (một từ). In từng ký tự của xâu, mỗi ký tự một dòng.","Vao: abc\nRa: a\nb\nc","Dùng vòng for với i từ 0 đến s.size() - 1.",HD+`int main() {
+    string s;
+    cin >> s;
+    for (int i = 0; i < s.size(); i++)
+        cout << s[i] << endl;
+}`],
+oe[8],
+["Nhập một xâu ký tự (một từ). In ra xâu đảo ngược.","Vao: abc\nRa: cba","Cho i chạy từ s.size() - 1 giảm dần về 0 và in s[i].",HD+`int main() {
+    string s;
+    cin >> s;
+    for (int i = s.size() - 1; i >= 0; i--)
+        cout << s[i];
+    cout << endl;
+}`],
+["Nhập một xâu ký tự (một từ). Đếm và in số ký tự là chữ số.","Vao: a1b22\nRa: 3","Ký tự là chữ số khi s[i] >= '0' && s[i] <= '9'.",HD+`int main() {
+    string s;
+    cin >> s;
+    int dem = 0;
+    for (int i = 0; i < s.size(); i++)
+        if (s[i] >= '0' && s[i] <= '9') dem++;
+    cout << dem << endl;
+}`],
+["Nhập một câu (có dấu cách). Thay mỗi dấu cách bằng dấu gạch dưới _ rồi in ra.","Vao: hello big world\nRa: hello_big_world","Dùng getline để đọc cả câu; gặp s[i] == ' ' thì gán s[i] = '_'.",HD+`int main() {
+    string s;
+    getline(cin, s);
+    for (int i = 0; i < s.size(); i++)
+        if (s[i] == ' ') s[i] = '_';
+    cout << s << endl;
+}`],
+["Nhập một câu. Đếm và in số từ trong câu (các từ cách nhau bằng dấu cách).","Vao: toi hoc python\nRa: 3","cin >> w mỗi lần đọc một từ. Dùng while (cin >> w) để đọc đến hết dữ liệu.",HD+`int main() {
+    string w;
+    int dem = 0;
+    while (cin >> w) dem++;
+    cout << dem << endl;
+}`],
+["Nhập một xâu (một từ). In YES nếu xâu đọc xuôi và đọc ngược giống nhau (xâu đối xứng), ngược lại in NO.","Vao: level\nRa: YES","So sánh ký tự thứ i với ký tự thứ s.size() - 1 - i, chỉ cần duyệt nửa đầu.",HD+`int main() {
+    string s;
+    cin >> s;
+    bool dx = true;
+    for (int i = 0; i < s.size() / 2; i++)
+        if (s[i] != s[s.size() - 1 - i]) dx = false;
+    cout << (dx ? "YES" : "NO") << endl;
+}`]];
+var xs=[
+"Duyệt từng ký tự; toupper đổi một chữ cái thành chữ hoa.",
+ox[7],
+"s.size() - 1 là vị trí của ký tự cuối, nên s[s.size() - 1] là ký tự cuối cùng.",
+"Vòng for duyệt từng vị trí i; mỗi lượt in s[i] rồi xuống dòng.",
+ox[8],
+"Cho i chạy ngược từ vị trí cuối về 0 và in từng ký tự, được xâu đảo ngược.",
+"Ký tự là chữ số khi nằm trong khoảng từ '0' đến '9'; mỗi lần đúng thì tăng biến đếm.",
+"getline đọc cả câu kể cả dấu cách; gặp dấu cách thì đổi thành dấu gạch dưới.",
+"cin >> w đọc từng từ, mỗi lần đọc được một từ thì tăng biến đếm; vòng lặp dừng khi hết dữ liệu.",
+"Xâu đối xứng thì ký tự thứ i giống ký tự thứ s.size() - 1 - i; chỉ cần kiểm tra nửa đầu, có cặp nào khác nhau thì không đối xứng."];
+var ef=[
+["Viết hàm chao(ten) in ra Xin chao <ten>. Nhập tên (một từ) và gọi hàm.","Vao: Lan\nRa: Xin chao Lan","Hàm kiểu void, tham số string ten; bên trong dùng cout.",HD+`void chao(string ten) {
+    cout << "Xin chao " << ten << endl;
+}
+
+int main() {
+    string ten;
+    cin >> ten;
+    chao(ten);
+}`],
+oe[5],
+["Viết hàm tong(a, b) trả về tổng hai số nguyên. Nhập hai số và in kết quả bằng hàm.","Vao: 3 4\nRa: 7","Kiểu trả về int, trong hàm dùng return a + b;",`int tong(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << tong(a, b) << endl;
+}`],
+oe[6],
+["Viết hàm laChan(n) trả về true nếu n là số chẵn, ngược lại false. Nhập n, in YES nếu chẵn, NO nếu lẻ.","Vao: 7\nRa: NO","Hàm kiểu bool, return n % 2 == 0; bên ngoài dùng if (laChan(n)).",`bool laChan(int n) {
+    return n % 2 == 0;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    if (laChan(n)) cout << "YES" << endl;
+    else cout << "NO" << endl;
+}`],
+["Viết hàm giaiThua(n) trả về n giai thừa (n từ 1 đến 20). Nhập n và in kết quả bằng hàm.","Vao: 5\nRa: 120","Dùng kiểu long long; đặt gt = 1 rồi nhân dần từ 2 đến n.",`long long giaiThua(int n) {
+    long long gt = 1;
+    for (int i = 2; i <= n; i++)
+        gt *= i;
+    return gt;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << giaiThua(n) << endl;
+}`],
+["Viết hàm dienTich(dai, rong) trả về diện tích hình chữ nhật. Nhập chiều dài, chiều rộng (số nguyên) và in kết quả.","Vao: 5 3\nRa: 15","Diện tích là dai * rong.",`int dienTich(int dai, int rong) {
+    return dai * rong;
+}
+
+int main() {
+    int dai, rong;
+    cin >> dai >> rong;
+    cout << dienTich(dai, rong) << endl;
+}`],
+["Viết hàm tongChuSo(n) trả về tổng các chữ số của n. Nhập n và in kết quả.","Vao: 472\nRa: 13","Lặp khi n > 0: cộng n % 10 vào tổng rồi bỏ chữ số cuối bằng n /= 10.",`int tongChuSo(int n) {
+    int t = 0;
+    while (n > 0) {
+        t += n % 10;
+        n /= 10;
+    }
+    return t;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << tongChuSo(n) << endl;
+}`],
+["Viết hàm demUoc(n) trả về số ước dương của n. Nhập n và in kết quả.","Vao: 12\nRa: 6","Duyệt i từ 1 đến n, mỗi lần n % i == 0 thì tăng biến đếm; cuối cùng return.",`int demUoc(int n) {
+    int dem = 0;
+    for (int i = 1; i <= n; i++)
+        if (n % i == 0) dem++;
+    return dem;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << demUoc(n) << endl;
+}`],
+oe[9]];
+var xf=[
+"Hàm chao kiểu void nhận tham số ten và in lời chào; không cần return vì chỉ in ra.",
+ox[5],
+"Hàm tong trả về a + b; bên ngoài gọi tong(a, b) rồi in kết quả.",
+ox[6],
+"n % 2 == 0 tự nó là true hoặc false, nên hàm trả thẳng giá trị đó; bên ngoài dùng if để in YES hoặc NO.",
+"Đặt gt = 1 rồi nhân dần với 2 đến n, cuối cùng return gt; dùng long long vì giai thừa lớn rất nhanh.",
+"Diện tích hình chữ nhật là dài nhân rộng; hàm trả về tích đó.",
+"Lặp khi n còn lớn hơn 0: cộng chữ số cuối n % 10 vào tổng rồi bỏ chữ số cuối bằng n /= 10.",
+"Đếm các số i từ 1 đến n mà n % i == 0 rồi trả biến đếm về.",
+ox[9]];
+E.splice(6,1,em,es,ef);X.splice(6,1,xm,xs,xf);
+
+W.splice(6,1,
+[["int a[5] = {4, 9, 2, 7, 5};","Tạo mảng 5 số nguyên; chỉ số từ 0 đến 4."],["cout << a[0] << \" \" << a[4]","In phần tử đầu (4) và phần tử cuối (5)."],["a[1] = 0;","Đổi phần tử ở vị trí 1 (số 9) thành 0."],["for (int i = 0; i < 5; i++) {","i chạy từ 0 đến 4, đúng các chỉ số của mảng."],["tong += a[i];","Cộng từng phần tử vào tổng: 4 + 0 + 2 + 7 + 5 = 18."],["int m = a[0];","Giả sử phần tử đầu tiên là lớn nhất."],["if (a[i] > m) m = a[i];","Gặp phần tử lớn hơn thì cập nhật m. Kết quả m = 7."]],
+[["string s = \"Hello World\";","Tạo xâu 11 ký tự (dấu cách cũng được tính)."],["s.size()","Độ dài của xâu: 11."],["s[0], s[s.size() - 1]","Ký tự đầu H và ký tự cuối d."],["s.substr(0, 5)","Cắt 5 ký tự bắt đầu từ vị trí 0: Hello."],["s + \"!\"","Nối xâu s với dấu !, được Hello World!."],["s.find(\"World\")","Tìm vị trí xuất hiện đầu tiên của World: vị trí 6."],["for (int i = 0; i < 3; i++)","Duyệt ba ký tự đầu, in từng ký tự s[i] kèm dấu cách."]],
+[["void chao(string ten) {","Hàm tên chao, nhận một tham số ten; kiểu void nghĩa là không trả về giá trị."],["cout << \"Xin chao \" << ten << endl;","Thân hàm: in lời chào."],["int binhPhuong(int x) {","Hàm nhận số nguyên x và trả về một số nguyên."],["return x * x;","Tính x nhân x và trả kết quả về nơi gọi hàm."],["if (a > b) return a;","Trong max2, nếu a lớn hơn b thì trả a về và kết thúc hàm."],["return b;","Nếu if không đúng thì máy chạy tới dòng này và trả b về."],["chao(\"Lan\");","Gọi hàm trong main: truyền chữ Lan vào tham số ten."],["binhPhuong(5)","Gọi hàm với x = 5, hàm trả về 25 rồi cout in ra."]]);
+M.splice(6,1,
+["Truy cập a[n] hoặc a[-1] là ngoài phạm vi: kết quả sai hoặc chương trình lỗi.","Khai báo mảng nhỏ hơn số phần tử n nhập vào.","Nhầm chỉ số bắt đầu từ 1: phần tử đầu tiên là a[0]."],
+["Dùng cin >> s để đọc họ tên có dấu cách: chỉ lấy được từ đầu tiên, hãy dùng getline(cin, s).","Nhầm ký tự và xâu: 'a' là một ký tự, \"a\" là một xâu; so sánh s[i] == 'a' dùng nháy đơn.","Truy cập s[s.size()] là ngoài phạm vi; vị trí cuối là s.size() - 1."],
+["Quên return trong hàm có kiểu trả về khác void: kết quả không xác định.","Gọi hàm trước khi khai báo hàm đó: lỗi biên dịch vì hàm chưa được khai báo.","Quên kiểu của tham số, ví dụ int max2(a, b): phải viết int max2(int a, int b)."]);
+G.splice(6,1,
+[["Mảng là gì?","Hãy hình dung một dãy tủ đựng đồ xếp thẳng hàng và đánh số từ 0. Mỗi tủ chứa một giá trị cùng kiểu. Muốn lấy đồ trong tủ số 2 thì viết a[2]."],["Chỉ số bắt đầu từ 0","Phần tử đầu tiên là a[0]. Với mảng 5 phần tử, chỉ số hợp lệ là 0 đến 4; a[5] không thuộc mảng và gây lỗi."],["Duyệt mảng bằng vòng for","Để làm việc với mọi phần tử, cho i chạy từ 0 đến n - 1 và dùng a[i]. Cộng dồn, tìm lớn nhất, đếm... đều dựa trên cách duyệt này."],["Nhập cả mảng","Đọc n trước, rồi dùng vòng for để cin >> a[i] cho từng phần tử. Khai báo mảng đủ lớn, ví dụ int a[100]."]],
+[["Xâu ký tự là gì?","Hãy hình dung xâu như một hàng các ô, mỗi ô chứa một ký tự (chữ cái, chữ số, dấu cách, dấu câu). Giống mảng, ô đầu tiên có chỉ số 0."],["Lấy từng ký tự","s[i] lấy ký tự ở vị trí i. Dùng vòng for với i từ 0 đến s.size() - 1 để duyệt hết các ký tự của xâu."],["Các hàm làm việc với xâu","s.size() cho độ dài, s.substr(a, k) cắt k ký tự từ vị trí a, s.find(x) tìm vị trí của x (nếu không thấy sẽ trả về một giá trị đặc biệt gọi là npos). Nối hai xâu bằng dấu +."],["Đọc xâu từ bàn phím","cin >> s đọc đến dấu cách đầu tiên, còn getline(cin, s) đọc nguyên cả dòng kể cả dấu cách."]],
+[["Hàm là gì?","Hàm giống một cái máy: bạn đưa nguyên liệu vào (tham số), máy xử lý theo công thức đã định sẵn rồi trả sản phẩm ra (return). Có hàm, bạn không phải viết lại cùng một đoạn lệnh nhiều lần."],["Khai báo và gọi hàm","Phần khai báo chỉ ghi lại cách làm. Hàm chỉ chạy khi bạn gọi nó trong main, ví dụ binhPhuong(5). Khi gọi, giá trị 5 được đưa vào tham số x."],["Kiểu trả về và return","Kiểu đứng trước tên hàm cho biết hàm trả về loại giá trị nào. return gửi kết quả về nơi gọi, nên có thể dùng ngay trong cout hoặc gán cho biến: int kq = binhPhuong(5);. Hàm void không trả về gì."],["Thứ tự trong chương trình","C++ đọc từ trên xuống, nên hàm phải được viết phía trên chỗ gọi nó. Thông thường ta viết các hàm trước, hàm main nằm cuối cùng."]]);
+TR.splice(6,1,
+["a = {4, 9, 2, 7, 5}.","In a[0] và a[4]: 4 5.","a[1] = 0 nên mảng thành {4, 0, 2, 7, 5}.","Vòng for cộng dần: 4, 4, 6, 13, 18. In 18.","m bắt đầu bằng 4; gặp 7 lớn hơn nên m = 7 (0, 2, 5 đều nhỏ hơn).","In 7."],
+["s = \"Hello World\".","size() = 11, s[0] = H, s[10] = d (vị trí cuối là 11 - 1).","substr(0, 5) lấy 5 ký tự đầu: Hello.","s + \"!\" tạo xâu mới Hello World!.","find tìm thấy World bắt đầu ở vị trí 6 (Hello và dấu cách chiếm vị trí 0 đến 5).","Vòng for in s[0], s[1], s[2]: H e l."],
+["Máy chạy từ hàm main. Các hàm phía trên chỉ được ghi nhận, chưa chạy.","chao(\"Lan\"): ten = Lan, hàm in Xin chao Lan.","binhPhuong(5): x = 5, return 25, cout in 25.","max2(8, 12): a = 8, b = 12; 8 > 12 sai nên bỏ qua return a.","Máy chạy tới return b, trả 12 về, cout in 12."]);
+})();
+var KW="int|long|double|char|bool|string|void|const|if|else|for|while|return|true|false|using|namespace|include";
+var RX=new RegExp("(//.*)|(\"[^\"]*\"|'[^']*')|(\\b(?:"+KW+")\\b)|(\\b\\d+(?:\\.\\d+)?\\b)","g");
+function hl(s){s=s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");return s.replace(RX,function(m,a,b,c){return '<span class="'+(a?"c":b?"s":c?"k":"n")+'">'+m+'</span>'})}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function full(s){return s.charAt(0)=="#"?s:"#include <iostream>\nusing namespace std;\n\n"+s}
+var $=function(i){return document.getElementById(i)};
+var st=null;try{st=window.localStorage}catch(e){}
+function ld(k){try{return st&&st.getItem(k)||""}catch(e){return ""}}
+function sv(k,v){try{st&&st.setItem(k,v)}catch(e){}}
+
+/* ===== Giao diện học ===== */
+var part=1,cur=0,ex=0;
+function pk(i){return (i>5?"cpp2-pg":"cpp-pg")+i}
+function pg(i){return Math.min(10,+ld(pk(i))||0)}
+function nav(){$("nav").innerHTML=T.map(function(x,i){var on=i==cur;
+return '<button data-i="'+i+'" class="text-left whitespace-nowrap lg:whitespace-normal px-3 py-2.5 rounded-xl text-sm font-medium transition-all flex items-center justify-between gap-2 '+(on?"gradient-main text-white shadow-md":"text-neutral-700 hover:bg-blue-50")+'"><span>'+(i+1)+'. '+x.t+'</span>'+(part==2?'<span class="text-xs px-1.5 py-0.5 rounded-full '+(on?"bg-white/25":pg(i)==10?"bg-green-100 text-green-700":"bg-neutral-100 text-neutral-500")+'">'+pg(i)+'/10</span>':'')+'</button>'}).join("");
+$("t1").className="px-5 py-2.5 rounded-xl font-semibold transition-all "+(part==1?"gradient-main text-white shadow-md":"bg-white text-neutral-700 border border-neutral-200 hover:border-primary/50");
+$("t2").className="px-5 py-2.5 rounded-xl font-semibold transition-all "+(part==2?"gradient-main text-white shadow-md":"bg-white text-neutral-700 border border-neutral-200 hover:border-primary/50")}
+function H(icon,t){return '<h3 class="font-bold text-lg mt-7 mb-2 flex items-center gap-2 text-neutral-800"><i class="fa '+icon+' text-primary"></i>'+t+'</h3>'}
+function show(){var x=T[cur],h='<h2 class="text-2xl md:text-3xl font-bold mb-3"><span class="gradient-text">'+x.t+'</span></h2>',e=null;
+if(part==1){x.d.forEach(function(p){h+='<p class="mb-3 leading-relaxed text-neutral-700 max-w-prose">'+esc(p)+'</p>'});
+h+=H("fa-lightbulb-o","Giải thích chi tiết")+"<div class='box box-q' style='margin-top:0'>"+G[cur].map(function(g){return "<div style='margin-bottom:12px'><b>"+esc(g[0])+"</b><p class='leading-relaxed text-neutral-700'>"+esc(g[1])+"</p></div>"}).join("")+"</div>";
+h+=H("fa-code","Code ví dụ")+"<pre><code>"+hl(x.c)+"</code></pre>"+H("fa-terminal","Kết quả khi chạy")+"<div class='out'></div>";
+h+=H("fa-play-circle","Máy chạy ví dụ như thế nào?")+"<ol class='list-decimal pl-6 space-y-1 text-neutral-700'>"+TR[cur].map(function(t){return "<li>"+esc(t)+"</li>"}).join("")+"</ol>";
+h+=H("fa-list-ol","Giải thích từng dòng")+"<ol class='wk'>"+W[cur].map(function(w){return "<li><code>"+esc(w[0])+"</code>"+esc(w[1])+"</li>"}).join("")+"</ol>";
+h+="<div class='box box-a'><b><i class='fa fa-exclamation-triangle mr-1'></i> Lỗi thường gặp</b><ul>"+M[cur].map(function(r){return "<li>"+esc(r)+"</li>"}).join("")+"</ul></div>";
+h+="<div class='box box-g'><b><i class='fa fa-bookmark mr-1'></i> Cần nhớ</b><ul>"+x.r.map(function(r){return "<li>"+esc(r)+"</li>"}).join("")+"</ul></div>";
+h+='<div class="mt-6"><button class="btn btn-p" data-part="2"><i class="fa fa-pencil mr-2"></i>Làm 10 bài tập chủ đề này</button></div>';
+}else{var p=pg(cur);e=E[cur][ex];
+h+='<div class="flex flex-wrap gap-2 mb-3" role="tablist" aria-label="Danh sách bài tập">';
+for(var i=0;i<10;i++)h+='<button class="chip'+(i==ex?" on":"")+(i<p?" dn":"")+'" data-e="'+i+'"'+(i>p?" disabled":"")+' title="'+(i>p?"Hoàn thành bài trước để mở":"Bài "+(i+1))+'">'+(i<p?'<i class="fa fa-check"></i> ':i>p?'<i class="fa fa-lock text-xs"></i> ':"")+(i+1)+'</button>';
+h+='</div><div class="pbar"><i style="width:'+p*10+'%"></i></div>';
+h+=H("fa-question-circle","Bài "+(ex+1)+"/10 – Đề bài")+"<div class='box box-q' style='margin-top:0'>"+esc(e[0])+"</div>"+H("fa-terminal","Ví dụ")+"<div class='out'></div>";
+h+="<details class='dt'><summary><i class='fa fa-lightbulb-o text-amber-500 mr-2'></i>Gợi ý cách giải</summary><p class='mt-2 text-neutral-700'>"+esc(e[2])+"</p></details>";
+h+=H("fa-code","Khu vực viết code C++")+"<textarea id='ed' class='ed' spellcheck='false' aria-label='Viết code C++' placeholder='// Viết code của bạn ở đây'></textarea>";
+h+='<div class="flex flex-wrap gap-2 mt-3"><button class="btn" id="rs"><i class="fa fa-eraser mr-2"></i>Xóa code</button></div>';
+h+='';
+h+="<details class='dt'><summary><i class='fa fa-eye text-primary mr-2'></i>Xem lời giải tham khảo</summary><pre><code>"+hl(full(e[3]))+"</code></pre><p class='text-neutral-700'><b>Giải thích:</b> "+esc(X[cur][ex])+"</p></details>";
+h+='<div class="mt-5"><button class="btn btn-ok" id="fin">'+(ex<9?"Tôi đã làm xong, sang bài "+(ex+2)+' <i class="fa fa-arrow-right ml-1"></i>':'Hoàn thành bài cuối <i class="fa fa-flag-checkered ml-1"></i>')+'</button></div>';
+if(p>=10)h+='<div class="box box-g"><b><i class="fa fa-trophy mr-1"></i> Bạn đã hoàn thành cả 10 bài của chủ đề này!</b>'+(cur<T.length-1?'<div class="mt-3"><button class="btn btn-p" data-nt="1">Sang chủ đề '+(cur+2)+': '+esc(T[cur+1].t)+'</button></div>':'<p class="mt-1">Bạn đã đi hết các chủ đề. Chúc mừng!</p>')+'</div>';
+h+='<p class="text-sm text-neutral-500 mt-4">Trang không chạy code trực tiếp. Hãy chép code vào máy để biên dịch và chạy thử, đối chiếu với ví dụ, rồi bấm nút xong để sang bài tiếp theo.</p>'}
+var m=$("main");m.innerHTML=h;
+var o=m.querySelector(".out");if(o)o.textContent=part==1?x.o:e[1];
+var ed=$("ed");
+if(ed){var key=(cur>5?"cpp2-ex":"cpp-ex")+cur+"-"+ex;ed.value=ld(key);ed.oninput=function(){sv(key,ed.value)};
+ed.onkeydown=function(ev){if(ev.key=="Tab"){ev.preventDefault();ed.setRangeText("    ",ed.selectionStart,ed.selectionEnd,"end");sv(key,ed.value)}};
+$("rs").onclick=function(){ed.value="";sv(key,"");ed.focus()}}
+nav();try{history.replaceState(null,"","#p"+part+"b"+(cur+1)+(part==2?"e"+(ex+1):""))}catch(er){}}
+document.addEventListener("click",function(ev){var t=ev.target;
+var b=t.closest("[data-i],[data-part],[data-e],[data-nt],#t1,#t2,#fin");if(!b||b.disabled)return;
+if(b.id=="t1")part=1;
+else if(b.id=="t2"){part=2;ex=Math.min(pg(cur),9)}
+else if(b.dataset.part){part=2;ex=Math.min(pg(cur),9)}
+else if(b.dataset.i){cur=+b.dataset.i;ex=Math.min(pg(cur),9)}
+else if(b.dataset.e)ex=+b.dataset.e;
+else if(b.dataset.nt){cur++;ex=Math.min(pg(cur),9)}
+else if(b.id=="fin"){if(pg(cur)<=ex)sv(pk(cur),String(ex+1));if(ex<9)ex++}
+show();if(!t.closest("#nav"))window.scrollTo({top:0,behavior:"smooth"})});
+try{var mm=/p(\d)b(\d+)(?:e(\d+))?/.exec(location.hash);if(mm&&T[mm[2]-1]){part=+mm[1]==2?2:1;cur=mm[2]-1;if(part==2)ex=Math.min(pg(cur),(+mm[3]||1)-1,9)}}catch(er){}
+show();
+</script>
+</body>
+</html>
